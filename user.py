@@ -65,8 +65,9 @@ async def login(session: aiohttp.ClientSession, uid: str, soap_url: str, passwor
         login_data_text = await soap.request_for_text(session, soap_url, 'UsersLoginJson', {
             'lpszUserName': uid,
             'lpszPasswordMD5': hashlib.md5(password.encode()).hexdigest(),
-            'lpszHardwareKey': "ClientVersion: 5.2.3.52390\nAppKey: MyiPad",
+            'lpszHardwareKey': "ClientVersion: 5.2.3.52408\nAppKey: MyiPad",
         })
+        print(login_data_text)
         with p.open(mode='w') as f:
             f.write(login_data_text)
         user.login_data = json.loads(login_data_text)
